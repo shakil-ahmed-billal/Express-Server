@@ -3,10 +3,9 @@ import { pool } from "../../config/db";
 import { userService } from "./user.service";
 
 const createUser = async (req: Request, res: Response) => {
-  const { name, email } = req.body;
 
   try {
-    const result = await userService.createUser(name, email);
+    const result = await userService.createUser(req.body);
     res.status(201).json({
       success: true,
       message: "User created successfully",
@@ -55,10 +54,10 @@ const getSingleUser = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, email } = req.body;
+  const { name, email , role } = req.body;
 
   try {
-    const result = await userService.updateUser(id as string, name, email);
+    const result = await userService.updateUser(id as string, name, email , role);
 
     res.status(200).json({
       success: true,
